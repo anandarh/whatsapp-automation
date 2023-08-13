@@ -1,8 +1,9 @@
 const qrcode = require('qrcode-terminal');
-const { Client} = require('whatsapp-web.js');
+const { Client, LocalAuth} = require('whatsapp-web.js');
 
-// Set up the WhatsApp client with specific Puppeteer options
+// Set up the WhatsApp client
 const client = new Client({
+    // Configuration for Puppeteer, a headless browser automation library
     puppeteer: {
         headless: 'new',
         args: [
@@ -10,7 +11,12 @@ const client = new Client({
             "--disable-setuid-sandbox",
             "--disable-gpu"
         ]
-	}
+	},
+    // Use a local authentication strategy for client authentication
+    // It is possible to not re-authenticate every time the client is restarted
+    authStrategy: new LocalAuth({
+        dataPath: './data/client_auth'
+    }),
 });
 
 // Event listener to log loading screens with their progress and message
@@ -21,7 +27,6 @@ client.on('loading_screen', (percent, message) => {
 // Event listener to generate and display QR code when required for authentication
 // This event will not be fired if a session is specified
 client.on('qr', qr => {
-    // console.log('QR RECEIVED', qr);
     qrcode.generate(qr, {small: true});
 });
 
