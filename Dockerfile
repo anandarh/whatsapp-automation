@@ -22,8 +22,8 @@ RUN apt update -qq
 
 # Install required packages quietly without recommended packages
 RUN apt install -qq -y --no-install-recommends \
-      chromium \
-      fonts-roboto fonts-croscore \
+    chromium \
+    fonts-roboto fonts-croscore \
     # Clean up cached files to reduce image size
     && rm -rf /var/lib/apt/lists/* \
     # Delete any Debian package files from /src
@@ -41,6 +41,9 @@ RUN npm install
 
 # Copy all files to the current working directory
 COPY . .
+
+# Relocating the node_modules directory into a data directory 
+RUN mkdir -p data && mv node_modules data/ && ln -s data/node_modules node_modules
 
 # Default command to run the application when the container starts
 CMD ["npm", "start"]

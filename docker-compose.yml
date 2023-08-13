@@ -8,10 +8,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      # Use a named volume "nodemodules" and bind it to /app/node_modules in the container
-      - nodemodules:/app/node_modules
-
+      # Use a named volume "app_data" and bind it to /app/data in the container
+      - app_data:/app/data
 # Definition of all volumes
 volumes:
   # nodemodules volume (it will be created if it doesn't exist)
-  nodemodules:  
+  app_data:  
