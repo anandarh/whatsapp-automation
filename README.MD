@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a Node.js-based automation for WhatsApp utilizing the whatsapp-web.js library. 
+This project is based on Node.js for WhatsApp automation. 
 
 To ensure platform independence and seamless deployment, the project has been dockerized.
 
