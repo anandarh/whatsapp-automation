@@ -27,6 +27,7 @@ client.on('loading_screen', (percent, message) => {
 // Event listener to generate and display QR code when required for authentication
 // This event will not be fired if a session is specified
 client.on('qr', qr => {
+    // console.log(qr);
     qrcode.generate(qr, {small: true});
 });
 
@@ -38,6 +39,12 @@ client.on('auth_failure', msg => {
 // Event listener to indicate when the client is ready
 client.on('ready', () => {
     console.log('Client is ready!');
+    // client.getChats().then((chats) => {
+    //     const monitoringGroup = chats.find((chat) => chat.name === 'Test');
+    //     monitoringGroup.sendMessage('Automated message!').then((message) => {
+    //         console.log('Message sent', `[${message.ack}]`)
+    //     });
+    // })
 });
 
 // Event listener to log disconnections and their reasons
